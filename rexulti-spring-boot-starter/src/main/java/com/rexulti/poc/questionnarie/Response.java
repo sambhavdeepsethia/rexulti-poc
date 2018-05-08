@@ -10,26 +10,26 @@ import javax.persistence.Table;
 public class Response {
 
 	@Id
-	@Column(name = "id")
-	private String id;
+//	@Column(name = "id")
+//	private String id;
 	@Column(name = "response")
 	private String response;
 	
 	public Response() {}
 	
-	public Response(String id, String response) {
+	public Response(String response) {
 		super();
-		this.id = id;
+//		this.id = id;
 		this.response = response;
 	}
 
-	public String getId() {
+/*	public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getResponse() {
 		return response;
