@@ -8,6 +8,11 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rexulti.poc.repository.PersonRepository;
+import com.rexulti.poc.repository.QuestionRepository;
+import com.rexulti.poc.repository.QuestionnarieRepository;
+import com.rexulti.poc.repository.ResponseRepository;
+
 @Service
 public class QuestionnarieService {
 

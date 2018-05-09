@@ -2,6 +2,8 @@ package com.rexulti.poc.questionnarie;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,18 +34,34 @@ public class QuestionnarieController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/questionnaries")
-	public void addQuestionnarie(@RequestBody Questionnarie questionarrie) throws javax.persistence.EntityNotFoundException{
-		 questionnarieService.addQuestionnarie(questionarrie);
+	public void addQuestionnarie(@RequestBody Questionnarie questionarrie){
+		try {
+		 	questionnarieService.addQuestionnarie(questionarrie);
+		}
+		catch(EntityNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/questionnaries")
-	public void updateQuestionnarie(@RequestBody Questionnarie questionarrie) throws javax.persistence.EntityNotFoundException{
-		 questionnarieService.updateQuestionnarie(questionarrie);
+	public void updateQuestionnarie(@RequestBody Questionnarie questionarrie) {
+		try {
+			questionnarieService.updateQuestionnarie(questionarrie);
+		}
+		catch(EntityNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/questionnaries")
 	public void deleteQuestionnarie(@RequestBody Questionnarie questionarrie){
-		questionnarieService.deleteQuestionnarie(questionarrie);
+		try {
+			questionnarieService.deleteQuestionnarie(questionarrie);
+		}
+		catch(EntityNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 }

@@ -1,5 +1,7 @@
-package com.rexulti.poc.questionnarie;
+package com.rexulti.poc.repository;
 import org.springframework.data.repository.CrudRepository;
+
+import com.rexulti.poc.questionnarie.Person;
 
 
 

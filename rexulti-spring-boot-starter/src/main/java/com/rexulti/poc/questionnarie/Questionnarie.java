@@ -1,8 +1,10 @@
 package com.rexulti.poc.questionnarie;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 //import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "questionnaries")
@@ -15,9 +17,14 @@ public class Questionnarie {
 //	@ManyToOne
 //	private Response response;
 //	
-	
+	@Column(name = "personName")
+	@NotNull
 	private String personName;
+	@Column(name = "question")
+	@NotNull
 	private String question;
+	@Column(name = "response")
+	@NotNull
 	private String response;
 	
 	public Questionnarie() {}
