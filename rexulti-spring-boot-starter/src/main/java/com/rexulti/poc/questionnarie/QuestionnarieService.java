@@ -55,6 +55,15 @@ public class QuestionnarieService {
 		return responses;
 	}
 	
+	public List<Questionnarie> getAllQuestionnaries() {
+		List<Questionnarie> questionnaries = new ArrayList<>();
+		Iterable<Questionnarie> questionnarieItr = questionnarieRepository.findAll();
+		for(Questionnarie questionnarie : questionnarieItr)
+			questionnaries.add(questionnarie);
+		
+		return questionnaries;
+	}
+	
 	public void addQuestionnarie(Questionnarie questionarrie) {
 		
 		System.out.println("Services Person name: "+ questionarrie.getPersonname());
@@ -78,8 +87,8 @@ public class QuestionnarieService {
 	
 	public void updateQuestionnarie(Questionnarie questionarrie) {
 		if( personRepository.existsByName(questionarrie.getPersonname())
-				&& !questionnarieRepository.existsByQuestion(questionarrie.getQuestion())
-				&& !responseRepository.existsByResponse(questionarrie.getResponse())){
+				&& questionnarieRepository.existsByQuestion(questionarrie.getQuestion())
+				&& responseRepository.existsByResponse(questionarrie.getResponse())){
 			questionnarieRepository.save(questionarrie);
 		}
 		else {
@@ -88,9 +97,16 @@ public class QuestionnarieService {
 				
 	}
 	
-	public void deleteQuestionnarie(Questionnarie questionarrie) {
-		questionnarieRepository.delete(questionarrie);
+	public void deleteQuestionnarie(Long id) {
+		questionnarieRepository.delete(questionnarieRepository.findById(id));
 	}
+
+	public Questionnarie getQuestionnarie(Long id) {
+		
+		return questionnarieRepository.findById(id);
+
+	}
+
 	
 	
 	//public void addQuestionnarie

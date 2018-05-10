@@ -9,8 +9,9 @@ public interface QuestionnarieRepository extends CrudRepository<Questionnarie, S
 	public boolean existsByQuestion(String question);
 
 	public boolean existsByPersonname(String personname);
-	
-	
+
+	public Questionnarie findById(Long id);
+
 }
 
 

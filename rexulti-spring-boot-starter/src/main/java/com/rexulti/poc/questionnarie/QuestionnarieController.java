@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +34,16 @@ public class QuestionnarieController {
 		return questionnarieService.getAllResponses();
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value="/questionnaries")
+	public List<Questionnarie> getAllQuestionarries(){
+		return questionnarieService.getAllQuestionnaries();
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/questionnaries/{id}")
+	public Questionnarie getQuestionarrie(@PathVariable Long id){
+		return questionnarieService.getQuestionnarie(id);
+	}
+	
 	@RequestMapping(method=RequestMethod.POST, value="/questionnaries")
 	public void addQuestionnarie(@RequestBody Questionnarie questionarrie){
 		try {
@@ -43,7 +54,7 @@ public class QuestionnarieController {
 		}
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/questionnaries")
+	@RequestMapping(method=RequestMethod.PUT, value="/questionnaries/{id}")
 	public void updateQuestionnarie(@RequestBody Questionnarie questionarrie) {
 		try {
 			questionnarieService.updateQuestionnarie(questionarrie);
@@ -54,10 +65,10 @@ public class QuestionnarieController {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/questionnaries")
-	public void deleteQuestionnarie(@RequestBody Questionnarie questionarrie){
+	@RequestMapping(method=RequestMethod.DELETE, value="/questionnaries/{id}")
+	public void deleteQuestionnarie(@PathVariable Long id){
 		try {
-			questionnarieService.deleteQuestionnarie(questionarrie);
+			questionnarieService.deleteQuestionnarie(id);
 		}
 		catch(EntityNotFoundException e) {
 			System.out.println(e.getMessage());
