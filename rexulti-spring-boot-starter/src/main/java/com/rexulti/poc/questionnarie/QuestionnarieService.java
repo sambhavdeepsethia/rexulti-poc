@@ -3,6 +3,7 @@ package com.rexulti.poc.questionnarie;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,21 +56,34 @@ public class QuestionnarieService {
 	}
 	
 	public void addQuestionnarie(Questionnarie questionarrie) {
-		if(personRepository.existsByName(questionarrie.getPersonName())){
-			questionnarieRepository.save(questionarrie);
+		
+		System.out.println("Services Person name: "+ questionarrie.getPersonname());
+		if( !personRepository.existsByName(questionarrie.getPersonname())
+			&& !questionnarieRepository.existsByQuestion(questionarrie.getQuestion())
+			&& !responseRepository.existsByResponse(questionarrie.getResponse())){
+			
+			throw new EntityNotFoundException();
+			
+		}
+		else if(questionnarieRepository.existsByPersonname(questionarrie.getPersonname())
+				&& questionnarieRepository.existsByQuestion(questionarrie.getQuestion())) {
+			throw new EntityExistsException("The person by name: " + questionarrie.getPersonname()  
+			+ " and question: " + questionarrie.getQuestion() + " already exists. Try PUT method instead");
 		}
 		else {
-			throw new EntityNotFoundException("Person: " + questionarrie.getPersonName() + " doesn't exist");
+			questionnarieRepository.save(questionarrie);
 		}
 				
 	}
 	
 	public void updateQuestionnarie(Questionnarie questionarrie) {
-		if(personRepository.existsByName(questionarrie.getPersonName())){
+		if( personRepository.existsByName(questionarrie.getPersonname())
+				&& !questionnarieRepository.existsByQuestion(questionarrie.getQuestion())
+				&& !responseRepository.existsByResponse(questionarrie.getResponse())){
 			questionnarieRepository.save(questionarrie);
 		}
 		else {
-			throw new EntityNotFoundException("Person: " + questionarrie.getPersonName() + " doesn't exist");
+			throw new EntityNotFoundException();
 		}
 				
 	}

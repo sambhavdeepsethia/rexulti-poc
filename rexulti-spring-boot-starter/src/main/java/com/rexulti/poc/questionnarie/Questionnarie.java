@@ -2,7 +2,10 @@ package com.rexulti.poc.questionnarie;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-//import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -10,38 +13,50 @@ import javax.validation.constraints.NotNull;
 @Table(name = "questionnaries")
 public class Questionnarie {
 
-//	@ManyToOne
-//	private Person person;
-//	@ManyToOne
-//	private Question question;
-//	@ManyToOne
-//	private Response response;
-//	
-	@Column(name = "personName")
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="id_seq")
+	@SequenceGenerator(name = "id_seq", sequenceName="questionnaries_id_seq")
+	@Column(name = "id")
+    private Long id;
+
+	
+	@Column(name = "personname")
 	@NotNull
-	private String personName;
+	private String personname;
+	
+	
 	@Column(name = "question")
 	@NotNull
 	private String question;
+	
 	@Column(name = "response")
 	@NotNull
 	private String response;
 	
 	public Questionnarie() {}
-
-	public Questionnarie(String personName, String question, String response) {
+	
+	public Questionnarie(@NotNull String personname, @NotNull String question, @NotNull String response) {
 		super();
-		this.personName = personName;
+		this.personname = personname;
 		this.question = question;
 		this.response = response;
 	}
 
-	public String getPersonName() {
-		return personName;
+	public Long getId() {
+		return id;
 	}
 
-	public void setPersonName(String personName) {
-		this.personName = personName;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getPersonname() {
+		return personname;
+	}
+
+	public void setPersonname(String personname) {
+		this.personname = personname;
 	}
 
 	public String getQuestion() {
@@ -59,15 +74,8 @@ public class Questionnarie {
 	public void setResponse(String response) {
 		this.response = response;
 	}
+
 	
 	
-	
-/*	public Questionnarie(String name, String question, String response) {
-		super();
-		this.person = new Person(name);
-		this.question = new Question(question);
-		this.response = new Response(response);
-	}*/
-	
-	
+
 }
