@@ -2,7 +2,10 @@ package com.rexulti.poc.questionnarie;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -10,9 +13,13 @@ import javax.persistence.Table;
 public class Person {
 
 	
-	//@Column(name = "id")
-	//private String id;
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="id_seq")
+	@SequenceGenerator(name = "id_seq", sequenceName="persons_id_seq")
+	@Column(name = "id")
+    private Long id;
+	
 	@Column(name = "name")
 	private String name;
 	
@@ -20,17 +27,16 @@ public class Person {
 	
 	public Person(String name) {
 		super();
-		//this.id = id;
 		this.name = name;
 	}
 
-	/*public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
-	}*/
+	}
 
 	public String getName() {
 		return name;

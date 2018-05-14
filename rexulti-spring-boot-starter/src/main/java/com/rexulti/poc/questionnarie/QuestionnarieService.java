@@ -30,10 +30,12 @@ public class QuestionnarieService {
 	public List<Person> getAllPersons(){
 		List<Person> persons = new ArrayList<>();
 		Iterable<Person> personItr = personRepository.findAll();
-		for(Person person: personItr)
-				persons.add(person);
 		
-		return persons;
+		return (List<Person>) personItr;
+//		for(Person person: personItr)
+//				persons.add(person);
+//		
+//		return persons;
 	}
 	
 	public List<Question> getAllQuestions(){

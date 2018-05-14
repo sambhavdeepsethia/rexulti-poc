@@ -20,7 +20,7 @@ public class QuestionnarieController {
 	private QuestionnarieService questionnarieService; 
 	
 	@RequestMapping(method=RequestMethod.GET, value="/persons")
-	public List<Person> getAllProjects(){
+	public List<Person> getAllPersons(){
 		return questionnarieService.getAllPersons();
 	}
 	
@@ -31,6 +31,11 @@ public class QuestionnarieController {
 	
 	@RequestMapping(method=RequestMethod.GET, value="/responses")
 	public List<Response> getAllResponses(){
+		return questionnarieService.getAllResponses();
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/questions/{id}/responses")
+	public List<Response> getQuestionResponse(){
 		return questionnarieService.getAllResponses();
 	}
 	
