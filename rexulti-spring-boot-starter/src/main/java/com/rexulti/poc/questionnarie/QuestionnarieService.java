@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.rexulti.poc.repository.PersonRepository;
 import com.rexulti.poc.repository.QuestionRepository;
+import com.rexulti.poc.repository.QuestionResponseRepository;
 import com.rexulti.poc.repository.QuestionnarieRepository;
 import com.rexulti.poc.repository.ResponseRepository;
 
@@ -26,9 +27,10 @@ public class QuestionnarieService {
 	private QuestionRepository questionRepository;
 	@Autowired
 	private ResponseRepository responseRepository;
+	@Autowired
+	private QuestionResponseRepository questionResponseRepository;
 	
 	public List<Person> getAllPersons(){
-		List<Person> persons = new ArrayList<>();
 		Iterable<Person> personItr = personRepository.findAll();
 		
 		return (List<Person>) personItr;
@@ -109,6 +111,18 @@ public class QuestionnarieService {
 
 	}
 
+	public List<Response> getQuestionResponse(Long question_id) {
+		
+		List<Long> response_ids = questionResponseRepository.getResponseIds(question_id);
+		List<Response> responses = new ArrayList<>();
+		for(Long id : response_ids) {
+			responseRepository.findById(id).ifPresent(responses::add);
+		}
+		
+		return responses;
+		
+	}
+	
 	
 	
 	//public void addQuestionnarie

@@ -5,7 +5,7 @@ import com.rexulti.poc.questionnarie.Person;
 
 
 
-public interface PersonRepository extends CrudRepository<Person, String>{
+public interface PersonRepository extends CrudRepository<Person, Long>{
 	
 	public Person findByName(String name);
 

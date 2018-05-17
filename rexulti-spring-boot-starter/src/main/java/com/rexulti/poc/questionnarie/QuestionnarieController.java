@@ -34,9 +34,11 @@ public class QuestionnarieController {
 		return questionnarieService.getAllResponses();
 	}
 	
+	
+	
 	@RequestMapping(method=RequestMethod.GET, value="/questions/{id}/responses")
-	public List<Response> getQuestionResponse(){
-		return questionnarieService.getAllResponses();
+	public List<Response> getQuestionResponse(@PathVariable Long id){
+		return questionnarieService.getQuestionResponse(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/questionnaries")

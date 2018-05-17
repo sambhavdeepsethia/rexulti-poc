@@ -16,8 +16,8 @@ import javax.persistence.Table;
 public class Response {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="id_seq")
-	@SequenceGenerator(name = "id_seq", sequenceName="questions_id_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="rid_seq")
+	@SequenceGenerator(name = "rid_seq", sequenceName="questions_id_seq")
 	@Column(name = "id")
     private Long id;
 	
