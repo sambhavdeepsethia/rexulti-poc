@@ -32,40 +32,24 @@ public class QuestionnarieService {
 	
 	public List<Person> getAllPersons(){
 		Iterable<Person> personItr = personRepository.findAll();
-		
 		return (List<Person>) personItr;
-//		for(Person person: personItr)
-//				persons.add(person);
-//		
-//		return persons;
 	}
 	
 	public List<Question> getAllQuestions(){
-		List<Question> questions = new ArrayList<>();
 		Iterable<Question> questionItr = questionRepository.findAll();
-		for(Question question: questionItr)
-			questions.add(question);
-		
-		return questions;
+		return (List<Question>) questionItr;
 	}
 	
 	
 	public List<Response> getAllResponses(){
-		List<Response> responses = new ArrayList<>();
 		Iterable<Response> responseItr = responseRepository.findAll();
-		for(Response response: responseItr)
-			responses.add(response);
-		
-		return responses;
+		return (List<Response>) responseItr;
+
 	}
 	
 	public List<Questionnarie> getAllQuestionnaries() {
-		List<Questionnarie> questionnaries = new ArrayList<>();
 		Iterable<Questionnarie> questionnarieItr = questionnarieRepository.findAll();
-		for(Questionnarie questionnarie : questionnarieItr)
-			questionnaries.add(questionnarie);
-		
-		return questionnaries;
+		return (List<Questionnarie>) questionnarieItr;
 	}
 	
 	public void addQuestionnarie(Questionnarie questionarrie) {
@@ -111,9 +95,10 @@ public class QuestionnarieService {
 
 	}
 
-	public List<Response> getQuestionResponse(Long question_id) {
+
+	public List<Response> getQuestionResponse(Long questionId) {
 		
-		List<Long> response_ids = questionResponseRepository.getResponseIds(question_id);
+		List<Long> response_ids = questionResponseRepository.getResponseIds(questionId);
 		List<Response> responses = new ArrayList<>();
 		for(Long id : response_ids) {
 			responseRepository.findById(id).ifPresent(responses::add);

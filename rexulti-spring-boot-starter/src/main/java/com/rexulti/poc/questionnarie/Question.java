@@ -1,5 +1,4 @@
 package com.rexulti.poc.questionnarie;
-import javax.persistence.JoinColumn;
 
 import java.util.List;
 
@@ -9,14 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "questions")
-public class Question {
+public class Question{
 
 
 	@Id
@@ -29,21 +28,20 @@ public class Question {
 	@Column(name = "question")
 	private String question;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "question_response", joinColumns = @JoinColumn(name = "question_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "response_id", referencedColumnName = "id"))
-    public List<Response> responses;
+//	@OneToMany
+//	private List<Response> responseObj;
+//	@ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "question_response", joinColumns = @JoinColumn(name = "question_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "response_id", referencedColumnName = "id"))
+//    public List<Response> responses;
 	
+//	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<QuestionResponse> responses;
+//	
 	public Question() {}
 
 	public Question(String question) {
 		super();
 		this.question = question;
-	}
-	
-	public Question(String question, List<Response> responses) {
-		super();
-		this.question = question;
-		this.responses = responses;
 	}
 
 	public Long getId() {
@@ -54,21 +52,17 @@ public class Question {
 		this.id = id;
 	}
 
-	public String getQuestion() {
+	public String getQuestionText() {
 		return question;
 	}
 
-	public void setQuestion(String question) {
+	public void setQuestionText(String question) {
 		this.question = question;
 	}
 
-	public List<Response> getResponses() {
-		return responses;
-	}
+//	public List<QuestionResponse> getResponses() {
+//		return responses;
+//	}
 
-	public void setResponses(List<Response> responses) {
-		this.responses = responses;
-	}
-	
 	
 }

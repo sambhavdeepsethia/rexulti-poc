@@ -1,13 +1,11 @@
 package com.rexulti.poc.questionnarie;
 
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,20 +22,21 @@ public class Response {
 	@Column(name = "response")
 	private String response;
 	
-	@ManyToMany(mappedBy = "responses")
-	private List<Question> questions;
+
+	
+/*	@ManyToMany(mappedBy = "responses")
+	private List<Question> questions;*/
+	
+
+//	
+//	@OneToMany(mappedBy = "response", cascade = CascadeType.ALL, orphanRemoval = true)
+//	private List<QuestionResponse> question;
 	
 	public Response() {}
 	
 	public Response(String response) {
 		super();
 		this.response = response;
-	}
-
-	public Response(String response, List<Question> questions) {
-		super();
-		this.response = response;
-		this.questions = questions;
 	}
 
 	public Long getId() {
@@ -48,21 +47,16 @@ public class Response {
 		this.id = id;
 	}
 
-	public String getResponse() {
+	public String getResponseText() {
 		return response;
 	}
 
-	public void setResponse(String response) {
+	public void setResponseText(String response) {
 		this.response = response;
 	}
 
-	public List<Question> getQuestions() {
-		return questions;
-	}
-
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}
-
-	
+//	public List<QuestionResponse> getQuestion() {
+//		return question;
+//	}
+//	
 }
